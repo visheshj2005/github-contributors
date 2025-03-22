@@ -7,8 +7,22 @@
     <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicons/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'false') {
+        // Configure Tailwind for dark mode
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+
+        // Check for saved dark mode preference or system preference
+        if (localStorage.getItem('darkMode') === null) {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } else if (localStorage.getItem('darkMode') === 'false') {
             document.documentElement.classList.remove('dark');
         }
 
@@ -19,7 +33,7 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 min-h-screen">
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-200">
     <div class="max-w-5xl mx-auto p-6">
         <!-- GitHub logo and link -->
         <a href="https://github.com/{{ owner }}/{{ repo }}" target="_blank" class="fixed top-4 left-4 opacity-80 hover:opacity-100 transition-opacity">
