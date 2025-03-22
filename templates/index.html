@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Contributors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <div class="max-w-5xl mx-auto p-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+            Contributors of <span class="text-blue-600 dark:text-blue-400">{{ owner }}/{{ repo }}</span>
+        </h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for contributor in contributors %}
+            <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 text-center transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                <img src="{{ contributor.avatar_url }}" alt="Profile Picture" class="w-20 h-20 mx-auto rounded-full border-4 border-blue-500 dark:border-blue-400">
+                <h2 class="text-lg font-semibold mt-3 text-gray-900 dark:text-white">{{ contributor.login }}</h2>
+                <p class="text-gray-600 dark:text-gray-300">Contributions: <span class="font-bold">{{ contributor.contributions }}</span></p>
+                <a href="{{ contributor.html_url }}" target="_blank" class="text-blue-600 dark:text-blue-400 font-medium mt-3 block hover:underline">
+                    View Profile →
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
